@@ -1,6 +1,8 @@
 #include<iostream>
 #include<ctime>
 #include<fstream>
+#include <stdlib.h>
+#include <stdio.h>
 #define N (4+3)%9+1 
 
 using namespace std;
@@ -102,13 +104,13 @@ void printSudoku()
     {
         for(int x = 0;x<9;x++)
         {
-//            cout<< sudoku[y][x] << " ";
+            cout<< sudoku[y][x] << " ";
             fout<< sudoku[y][x] << " ";
         }
-//        cout<< endl;
+        cout<< endl;
         fout<< endl;
     }
-//    cout << endl;
+    cout << endl;
     fout << endl;
    
 }
@@ -119,20 +121,36 @@ int main(int argc, char* argv[])
 {
     srand((unsigned)time(NULL));
     fout.open("sudoku.txt");
-    int n ;
-    while (!(cin >> n)) {
-        cin.clear();
-        // reset input
-        while (cin.get() != '\n')
-            continue;
-        // get rid of bad input
-        cout << "Please enter a number: ";
-    }
-    while(n--){
-        initSudoku(); //每次循环都要初始化数独数组
-        while (!set(0, 1));
-        printSudoku();
-//        cout << endl;
+    int num;
+        if ( argc != 3) {
+            printf("Usage: sudoku.exe -c [N:a number]\n");
+            return 0;
+        }
+        if (argc == 3)
+        {
+            num=atoi(argv[2]);
+            
+            if (num == 0) {
+                printf("Please enter a number greater than 1!\n");
+                return 0;
+            }
+            else{
+//            while (!(cin >> n)) {
+//                cin.clear();
+//                // reset input
+//                while (cin.get() != '\n')
+//                    continue;
+//                // get rid of bad input
+//                cout << "Please enter a number: ";
+//            }
+            while(num--)
+            {
+                initSudoku(); //每次循环都要初始化数独数组
+                while (!set(0, 1));
+                printSudoku();
+//          cout << endl;
+            }
+        }
     }
      fout.close();
 //    cout<< "1";
